@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>References & Skills</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>UNFinished Business – Employment Application</h1>
+    <nav aria-label="Steps">
+      <a href="index.html" >1. Applicant & Position</a>
+      <a href="page2.html" >2. Availability & Education</a>
+      <a href="page3.html" >3. Experience & License</a>
+      <a href="page4.html" aria-current="page">4. References & Skills</a>
+      <a href="page5.html" >5. Acknowledgement</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+<form onsubmit="event.preventDefault(); validatePage4();">
+<fieldset>
+<legend>References</legend>
+<div class="row">
+  <div class="col-6"><label for="ref1name">Reference Name</label><input id="ref1name" data-name="ref1name" type="text"></div>
+  <div class="col-6"><label for="ref1email">Reference Email</label><input id="ref1email" data-name="ref1email" type="email"></div>
+</div>
+<div class="help">Provide up to 3 references (non-relatives). Only one shown in prototype.</div>
+</fieldset>
+
+<fieldset>
+<legend>Additional Skills</legend>
+<textarea id="skills" data-name="skills" rows="4" placeholder="Add any skills relevant to the role..."></textarea>
+</fieldset>
+
+<div class="btnbar">
+  <a class="btn secondary" href="page3.html">Back</a>
+  <button type="submit">Next</button>
+</div>
+</form>
+</main>
+
+<footer>
+  <div class="container">© UNFinished Business — Prototype (data is not stored)</div>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>

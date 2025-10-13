@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Experience & License</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>UNFinished Business – Employment Application</h1>
+    <nav aria-label="Steps">
+      <a href="index.html">1. Applicant & Position</a>
+      <a href="page2.html">2. Availability & Education</a>
+      <a href="page3.html" aria-current="page">3. Experience & License</a>
+      <a href="page4.html">4. References & Skills</a>
+      <a href="page5.html">5. Acknowledgement</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <form onsubmit="event.preventDefault(); validatePage3();">
+
+    <fieldset>
+      <legend>Work Experience</legend>
+
+      <div id="expList"></div>
+
+      <div class="btnbar">
+        <button type="button" class="secondary" onclick="addExperience()">+ Add Employer</button>
+        <span></span>
+      </div>
+
+      <div id="err-experience" class="error hidden"></div>
+
+      <template id="expTemplate">
+        <div class="exp-card" data-exp-index="">
+          <div class="row">
+            <div class="col-6">
+              <label>Employer *</label>
+              <input type="text" data-field="employer" />
+            </div>
+            <div class="col-6">
+              <label>Job Title *</label>
+              <input type="text" data-field="jobTitle" />
+            </div>
+            <div class="col-6">
+              <label>Start Date</label>
+              <input type="date" data-field="startDate" />
+            </div>
+            <div class="col-6">
+              <label>End Date</label>
+              <input type="date" data-field="endDate" />
+            </div>
+            <div class="col-12">
+              <label>Key Duties</label>
+              <textarea rows="3" data-field="duties"></textarea>
+            </div>
+          </div>
+
+          <div class="btnbar">
+            <button type="button" class="secondary" onclick="removeExperience(this)">Remove</button>
+            <span></span>
+          </div>
+
+          <hr />
+        </div>
+      </template>
+    </fieldset>
+
+    <fieldset>
+      <legend>Driver’s License (role-dependent)</legend>
+      <div class="row">
+        <div class="col-12">
+          <label for="licenseReq">This role may require driving. Do you currently hold a valid driver’s license?</label>
+          <select id="licenseReq" data-name="licenseReq">
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+          <div id="err-license" class="error hidden"></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="btnbar">
+      <a class="btn secondary" href="page2.html">Back</a>
+      <button type="submit">Next</button>
+    </div>
+  </form>
+</main>
+
+<footer>
+  <div class="container">© UNFinished Business — Prototype (data is not stored)</div>
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+  if (typeof loadData !== "function") {
+    const KEY = "ufa_app";
+    window.loadData = () => { try { return JSON.parse(sessionStorage.getItem(KEY)) || {}; } catch { return {}; } };
+    window.saveData = (obj) => sessionStorage.setItem(KEY, JSON.stringify(obj || {}));
+  }
+
+  function getExperiences() {
+    const data = loadData();
+    if (!Array.isArray(data.experiences)) data.experiences = [];
+    return data.experiences;
+  }
+  function setExperiences(list) {
+    const data = loadData();
+    data.experiences = list;
+    saveData(data);
+  }
+
+  function renderExperiences() {
+    const wrap = document.getElementById('expList');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+
+    const tpl = document.getElementById('expTemplate');
+    const exps = getExperiences();
+
+    if (exps.length === 0) {
+      exps.push({ employer:'', jobTitle:'', startDate:'', endDate:'', duties:'' });
+      setExperiences(exps);
+    }
+
+    exps.forEach((exp, idx) => {
+      const node = tpl.content.cloneNode(true);
+      const card = node.querySelector('.exp-card');
+      card.dataset.expIndex = idx;
+
+      node.querySelectorAll('[data-field]').forEach(input => {
+        const field = input.getAttribute('data-field');
+        input.value = exp[field] || '';
+        input.addEventListener('input', () => {
+          const list = getExperiences();
+          list[idx][field] = input.value;
+          setExperiences(list);
+        });
+      });
+
+      wrap.appendChild(node);
+    });
+  }
+
+  function addExperience() {
+    const list = getExperiences();
+    list.push({ employer:'', jobTitle:'', startDate:'', endDate:'', duties:'' });
+    setExperiences(list);
+    renderExperiences();
+  }
+
+  function removeExperience(btn) {
+    const card = btn.closest('.exp-card');
+    const idx = Number(card.dataset.expIndex);
+    const list = getExperiences();
+    list.splice(idx, 1);
+    setExperiences(list);
+    renderExperiences();
+  }
+
+  function validatePage3() {
+    let ok = true;
+
+    const lic = document.getElementById('licenseReq').value.trim();
+    const licErr = document.getElementById('err-license');
+    licErr.classList.add('hidden');
+    licErr.textContent = '';
+    if (!lic) {
+      licErr.textContent = "Please answer the driver’s license question.";
+      licErr.classList.remove('hidden');
+      ok = false;
+    }
+
+    const list = getExperiences();
+    const expErr = document.getElementById('err-experience');
+    expErr.classList.add('hidden');
+    expErr.textContent = '';
+
+    for (let i = 0; i < list.length; i++) {
+      const e = list[i];
+      const hasAny = e.employer || e.jobTitle || e.startDate || e.endDate || e.duties;
+      if (hasAny && (!e.employer || !e.jobTitle)) {
+        expErr.textContent = "Each experience you add must include Employer and Job Title.";
+        expErr.classList.remove('hidden');
+        ok = false; break;
+      }
+      if (e.startDate && e.endDate && e.endDate < e.startDate) {
+        expErr.textContent = "End Date must be after Start Date in experience #" + (i+1) + ".";
+        expErr.classList.remove('hidden');
+        ok = false; break;
+      }
+    }
+
+    if (ok) window.location.href = "page4.html";
+  }
+
+  window.addEventListener('DOMContentLoaded', renderExperiences);
+</script>
+
+</body>
+</html>

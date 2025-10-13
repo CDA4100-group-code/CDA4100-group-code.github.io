@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Acknowledgement</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>UNFinished Business – Employment Application</h1>
+    <nav aria-label="Steps">
+      <a href="index.html" >1. Applicant & Position</a>
+      <a href="page2.html" >2. Availability & Education</a>
+      <a href="page3.html" >3. Experience & License</a>
+      <a href="page4.html" >4. References & Skills</a>
+      <a href="page5.html" aria-current="page">5. Acknowledgement</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+<form onsubmit="submitApp(event)">
+<fieldset>
+<legend>Application Acknowledgement</legend>
+<p>I understand that this application does not guarantee a job. If I am hired, either I or the company can end the job at any time. I confirm that the information I provide is true. I give permission for the company to check my references, past jobs, and education. I understand I may need to take a drug test or background check. I also know company rules and benefits may change over time.</p>
+<label><input type="checkbox" data-name="agree" id="agree"> I agree</label>
+</fieldset>
+
+<div id="success" class="success hidden" role="status">Application submitted successfully. (Prototype: data not stored.)</div>
+
+<div class="btnbar">
+  <a class="btn secondary" href="page4.html">Back</a>
+  <button id="submitBtn" type="submit">Submit Application</button>
+</div>
+</form>
+</main>
+
+<footer>
+  <div class="container">© UNFinished Business — Prototype (data is not stored)</div>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
