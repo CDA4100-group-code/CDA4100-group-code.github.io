@@ -12,29 +12,55 @@
   <div class="container">
     <h1>UNFinished Business – Employment Application</h1>
     <nav aria-label="Steps">
-      <a href="index.html" >1. Applicant & Position</a>
-      <a href="page2.html" >2. Availability & Education</a>
-      <a href="page3.html" >3. Experience & License</a>
+      <a href="index.html">1. Applicant & Position</a>
+      <a href="page2.html">2. Availability & Education</a>
+      <a href="page3.html">3. Experience & License</a>
       <a href="page4.html" aria-current="page">4. References & Skills</a>
-      <a href="page5.html" >5. Acknowledgement</a>
+      <a href="page5.html">5. Acknowledgement</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
 <form onsubmit="event.preventDefault(); validatePage4();">
+
 <fieldset>
-<legend>References</legend>
-<div class="row">
-  <div class="col-6"><label for="ref1name">Reference Name</label><input id="ref1name" data-name="ref1name" type="text"></div>
-  <div class="col-6"><label for="ref1email">Reference Email</label><input id="ref1email" data-name="ref1email" type="email"></div>
-</div>
-<div class="help">Provide up to 3 references (non-relatives). Only one shown in prototype.</div>
+  <legend>References</legend>
+  <div id="refList"></div>
+
+  <div class="btnbar">
+    <button id="addRefBtn" type="button" class="secondary" onclick="addReference()">+ Add Reference</button>
+    <span></span>
+  </div>
+
+  <div id="err-reference" class="error hidden"></div>
+
+  <template id="refTemplate">
+    <div class="ref-card" data-ref-index="">
+      <div class="row">
+        <div class="col-6">
+          <label>Reference Name</label>
+          <input type="text" data-field="name" />
+        </div>
+        <div class="col-6">
+          <label>Reference Email</label>
+          <input type="email" data-field="email" />
+        </div>
+      </div>
+      <div class="btnbar">
+        <button type="button" class="secondary" onclick="removeReference(this)">Remove</button>
+        <span></span>
+      </div>
+      <hr />
+    </div>
+  </template>
+
+  <div class="help"><span id="refLimitMsg" class="error hidden">Maximum 3 references allowed.</span> Provide up to 3 references (non-relatives).</div>
 </fieldset>
 
 <fieldset>
-<legend>Additional Skills</legend>
-<textarea id="skills" data-name="skills" rows="4" placeholder="Add any skills relevant to the role..."></textarea>
+  <legend>Additional Skills</legend>
+  <textarea id="skills" data-name="skills" rows="4" placeholder="Add any skills relevant to the role..."></textarea>
 </fieldset>
 
 <div class="btnbar">
@@ -47,7 +73,114 @@
 <footer>
   <div class="container">© UNFinished Business — Prototype (data is not stored)</div>
 </footer>
+
 <script src="script.js"></script>
+
+<script>
+  if (typeof loadData !== "function") {
+    const KEY = "ufa_app";
+    window.loadData = () => { try { return JSON.parse(sessionStorage.getItem(KEY)) || {}; } catch { return {}; } };
+    window.saveData = (obj) => sessionStorage.setItem(KEY, JSON.stringify(obj || {}));
+  }
+
+  const MAX_REFS = 3;
+
+  function getReferences() {
+    const data = loadData();
+    if (!Array.isArray(data.references)) data.references = [];
+    return data.references;
+  }
+
+  function setReferences(list) {
+    const data = loadData();
+    data.references = list;
+    saveData(data);
+  }
+
+  function updateAddButtonVisibility() {
+    const btn = document.getElementById('addRefBtn');
+    const msg = document.getElementById('refLimitMsg');
+    const count = getReferences().length;
+    const atLimit = count >= MAX_REFS;
+    if (btn) btn.style.display = atLimit ? 'none' : '';
+    if (msg) msg.classList.toggle('hidden', !atLimit);
+  }
+
+  function renderReferences() {
+    const wrap = document.getElementById('refList');
+    wrap.innerHTML = '';
+    const tpl = document.getElementById('refTemplate');
+    const refs = getReferences();
+
+    if (refs.length === 0) {
+      refs.push({ name:'', email:'' });
+      setReferences(refs);
+    }
+
+    refs.forEach((ref, idx) => {
+      const node = tpl.content.cloneNode(true);
+      const card = node.querySelector('.ref-card');
+      card.dataset.refIndex = idx;
+
+      node.querySelectorAll('[data-field]').forEach(input => {
+        const field = input.getAttribute('data-field');
+        input.value = ref[field] || '';
+        input.addEventListener('input', () => {
+          const list = getReferences();
+          list[idx][field] = input.value;
+          setReferences(list);
+        });
+      });
+
+      wrap.appendChild(node);
+    });
+
+    updateAddButtonVisibility();
+  }
+
+  function addReference() {
+    const list = getReferences();
+    if (list.length >= MAX_REFS) { updateAddButtonVisibility(); return; }
+    list.push({ name:'', email:'' });
+    setReferences(list);
+    renderReferences();
+  }
+
+  function removeReference(btn) {
+    const card = btn.closest('.ref-card');
+    const idx = Number(card.dataset.refIndex);
+    const list = getReferences();
+    list.splice(idx, 1);
+    setReferences(list);
+    renderReferences(); 
+  }
+
+  function validatePage4() {
+    let ok = true;
+    const refs = getReferences();
+    const err = document.getElementById('err-reference');
+    err.textContent=''; err.classList.add('hidden');
+
+    for (let i=0; i<refs.length; i++) {
+      const r = refs[i];
+      if ((r.name && !r.email) || (!r.name && r.email)) {
+        err.textContent = `Reference #${i+1} must include both Name and Email.`;
+        err.classList.remove('hidden');
+        ok = false;
+        break;
+      }
+    }
+
+    if (ok) {
+      const data = loadData();
+      data.skills = document.getElementById('skills').value.trim();
+      saveData(data);
+      window.location.href = "page5.html";
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', renderReferences);
+</script>
 
 </body>
 </html>
