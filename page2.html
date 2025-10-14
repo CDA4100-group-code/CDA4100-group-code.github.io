@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Availability & Education</title>
 <link rel="stylesheet" href="styles.css" />
@@ -12,85 +12,158 @@
   <div class="container">
     <h1>UNFinished Business – Employment Application</h1>
     <nav aria-label="Steps">
-      <a href="index.html" >1. Applicant & Position</a>
+      <a href="index.html">1. Applicant & Position</a>
       <a href="page2.html" aria-current="page">2. Availability & Education</a>
-      <a href="page3.html" >3. Experience & License</a>
-      <a href="page4.html" >4. References & Skills</a>
-      <a href="page5.html" >5. Acknowledgement</a>
+      <a href="page3.html">3. Experience & License</a>
+      <a href="page4.html">4. References & Skills</a>
+      <a href="page5.html">5. Acknowledgement</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
-<form onsubmit="event.preventDefault(); validatePage2();">
-<fieldset>
-<legend>Availability</legend>
-<div class="row">
-  <div class="col-12 help">Select the days you can work and (optionally) your typical start-end times.</div>
-  <div class="col-12">
-    <label>Days</label>
-    <div role="group" aria-label="Days available">
-      <label><input data-name="dayMon" id="dayMon" type="checkbox"> Mon</label>
-      <label><input data-name="dayTue" id="dayTue" type="checkbox"> Tue</label>
-      <label><input data-name="dayWed" id="dayWed" type="checkbox"> Wed</label>
-      <label><input data-name="dayThu" id="dayThu" type="checkbox"> Thu</label>
-      <label><input data-name="dayFri" id="dayFri" type="checkbox"> Fri</label>
-      <label><input data-name="daySat" id="daySat" type="checkbox"> Sat</label>
-      <label><input data-name="daySun" id="daySun" type="checkbox"> Sun</label>
+  <form onsubmit="event.preventDefault(); validatePage2();">
+
+    <fieldset>
+      <legend>Availability</legend>
+      <div class="row">
+        <div class="col-12 help">Select the days you can work and (optionally) your typical start-end times.</div>
+        <div class="col-12">
+          <label>Days</label>
+          <div role="group" aria-label="Days available">
+            <label><input data-name="dayMon" id="dayMon" type="checkbox"> Mon</label>
+            <label><input data-name="dayTue" id="dayTue" type="checkbox"> Tue</label>
+            <label><input data-name="dayWed" id="dayWed" type="checkbox"> Wed</label>
+            <label><input data-name="dayThu" id="dayThu" type="checkbox"> Thu</label>
+            <label><input data-name="dayFri" id="dayFri" type="checkbox"> Fri</label>
+            <label><input data-name="daySat" id="daySat" type="checkbox"> Sat</label>
+            <label><input data-name="daySun" id="daySun" type="checkbox"> Sun</label>
+          </div>
+        </div>
+        <div class="col-6">
+          <label for="timeStart">Typical Start Time</label>
+          <input id="timeStart" data-name="timeStart" type="time">
+        </div>
+        <div class="col-6">
+          <label for="timeEnd">Typical End Time</label>
+          <input id="timeEnd" data-name="timeEnd" type="time">
+        </div>
+        <div class="col-12">
+          <label><input id="nights" data-name="nights" type="checkbox"> I can work nights</label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Education</legend>
+      <div class="row">
+        <div class="col-6">
+          <label for="degree">Highest Diploma/Degree *</label>
+          <select id="degree" data-name="degree">
+            <option value="">Select</option>
+            <option>High School</option>
+            <option>Associate</option>
+            <option>Bachelor</option>
+            <option>Master</option>
+            <option>Doctorate</option>
+            <option>Certificate</option>
+          </select>
+          <div id="err-degree" class="error hidden"></div>
+        </div>
+        <div class="col-6">
+          <label for="major">Major/Field</label>
+          <input id="major" data-name="major" type="text">
+        </div>
+
+        <div class="col-12">
+          <label for="certUpload">Professional Certifications (Optional) (PDF uploads only)</label>
+          <input id="certUpload" type="file" accept="application/pdf" multiple />
+          <div class="help">Upload up to 6 PDFs (max 5MB each). Example: CPR, OSHA 10, ServSafe.</div>
+          <div id="err-cert" class="error hidden"></div>
+
+          <ul id="certList" class="help" style="margin-top:8px"></ul>
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="btnbar">
+      <a class="btn secondary" href="index.html">Back</a>
+      <button type="submit">Next</button>
     </div>
-  </div>
-  <div class="col-6">
-    <label for="timeStart">Typical Start Time</label>
-    <input id="timeStart" data-name="timeStart" type="time">
-  </div>
-  <div class="col-6">
-    <label for="timeEnd">Typical End Time</label>
-    <input id="timeEnd" data-name="timeEnd" type="time">
-  </div>
-  <div class="col-12">
-    <label><input id="nights" data-name="nights" type="checkbox"> I can work nights</label>
-  </div>
-</div>
-</fieldset>
-
-<fieldset>
-<legend>Education</legend>
-<div class="row">
-  <div class="col-6">
-    <label for="degree">Highest Diploma/Degree *</label>
-    <select id="degree" data-name="degree">
-      <option value="">Select</option>
-      <option>High School</option>
-      <option>Associate</option>
-      <option>Bachelor</option>
-      <option>Master</option>
-      <option>Doctorate</option>
-      <option>Certificate</option>
-    </select>
-    <div id="err-degree" class="error hidden"></div>
-  </div>
-  <div class="col-6">
-    <label for="major">Major/Field</label>
-    <input id="major" data-name="major" type="text">
-  </div>
-  <div class="col-12">
-    <label for="certs">Professional Certifications (optional)</label>
-    <textarea id="certs" data-name="certs" rows="3" placeholder="e.g., CPR, OSHA 10, ServSafe"></textarea>
-  </div>
-</div>
-</fieldset>
-
-<div class="btnbar">
-  <a class="btn secondary" href="index.html">Back</a>
-  <button type="submit">Next</button>
-</div>
-</form>
+  </form>
 </main>
 
 <footer>
   <div class="container">© UNFinished Business — Prototype (data is not stored)</div>
 </footer>
+
 <script src="script.js"></script>
+
+<script>
+  window.__certFiles = window.__certFiles || [];
+
+  const MAX_FILES = 6;
+  const MAX_SIZE  = 5 * 1024 * 1024; 
+
+  function renderCertList(){
+    const ul = document.getElementById('certList');
+    ul.innerHTML = '';
+    if (!window.__certFiles.length) return;
+    window.__certFiles.forEach((f, idx) => {
+      const li = document.createElement('li');
+      li.textContent = `${f.name} (${(f.size/1024).toFixed(0)} KB)`;
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'secondary';
+      btn.style.marginLeft = '8px';
+      btn.textContent = 'Remove';
+      btn.onclick = () => { window.__certFiles.splice(idx,1); renderCertList(); };
+      li.appendChild(btn);
+      ul.appendChild(li);
+    });
+  }
+
+  function handleCertUpload(evt){
+    const files = Array.from(evt.target.files || []);
+    const err = document.getElementById('err-cert');
+    err.textContent=''; err.classList.add('hidden');
+
+    let newList = window.__certFiles.concat(files);
+
+    newList = newList.filter(f => {
+      if (f.type !== 'application/pdf') return false;
+      if (f.size > MAX_SIZE) return false;
+      return true;
+    });
+
+    if (newList.length > MAX_FILES) {
+      newList = newList.slice(0, MAX_FILES);
+      err.textContent = `Only up to ${MAX_FILES} PDF files are allowed. Extra files were ignored.`;
+      err.classList.remove('hidden');
+    }
+
+    window.__certFiles = newList;
+    evt.target.value = '';
+    renderCertList();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const inp = document.getElementById('certUpload');
+    inp.addEventListener('change', handleCertUpload);
+    renderCertList();
+  });
+
+  const _origValidatePage2 = (typeof validatePage2 === 'function') ? validatePage2 : null;
+  function validatePage2(){
+    if (_origValidatePage2) return _origValidatePage2();
+    let ok = true;
+    const deg = document.getElementById('degree').value;
+    const e = document.getElementById('err-degree');
+    e.textContent=''; e.classList.add('hidden');
+    if (!deg){ e.textContent='Please choose your highest degree.'; e.classList.remove('hidden'); ok=false; }
+    if (ok) window.location.href='page3.html';
+  }
+</script>
 
 </body>
 </html>
