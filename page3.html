@@ -5,6 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Experience & License</title>
 <link rel="stylesheet" href="styles.css" />
+
+<style>
+  input[type="date"] {
+    position: relative;
+    color: transparent;
+  }
+  input[type="date"]:focus,
+  input[type="date"]:valid {
+    color: #111;
+  }
+  input[type="date"]::before {
+    content: attr(placeholder);
+    color: #9ca3af;
+    position: absolute;
+    left: 10px;
+  }
+  input[type="date"]:focus::before,
+  input[type="date"]:valid::before {
+    content: "";
+  }
+</style>
 </head>
 <body>
 
@@ -22,75 +43,113 @@
 </header>
 
 <main class="container">
-  <form onsubmit="event.preventDefault(); validatePage3();">
+<form onsubmit="event.preventDefault(); validatePage3();">
 
-    <fieldset>
-      <legend>Work Experience</legend>
+<fieldset>
+  <legend>Work Experience</legend>
 
-      <div id="expList"></div>
+  <div id="expList"></div>
+
+  <div class="btnbar">
+    <button type="button" class="secondary" onclick="addExperience()">+ Add Employer</button>
+    <span></span>
+  </div>
+
+  <div id="err-experience" class="error hidden"></div>
+
+  <template id="expTemplate">
+    <div class="exp-card" data-exp-index="">
+      <div class="row">
+        <div class="col-6">
+          <label>Employer *</label>
+          <input type="text" data-field="employer" />
+        </div>
+        <div class="col-6">
+          <label>Job Title *</label>
+          <input type="text" data-field="jobTitle" />
+        </div>
+        <div class="col-6">
+          <label>Start Date</label>
+          <input type="date" data-field="startDate" placeholder="mm/dd/yyyy" />
+        </div>
+        <div class="col-6">
+          <label>End Date</label>
+          <input type="date" data-field="endDate" placeholder="mm/dd/yyyy" />
+        </div>
+        <div class="col-12">
+          <label>Key Duties</label>
+          <textarea rows="3" data-field="duties"></textarea>
+        </div>
+      </div>
 
       <div class="btnbar">
-        <button type="button" class="secondary" onclick="addExperience()">+ Add Employer</button>
+        <button type="button" class="secondary" onclick="removeExperience(this)">Remove</button>
         <span></span>
       </div>
 
-      <div id="err-experience" class="error hidden"></div>
-
-      <template id="expTemplate">
-        <div class="exp-card" data-exp-index="">
-          <div class="row">
-            <div class="col-6">
-              <label>Employer *</label>
-              <input type="text" data-field="employer" />
-            </div>
-            <div class="col-6">
-              <label>Job Title *</label>
-              <input type="text" data-field="jobTitle" />
-            </div>
-            <div class="col-6">
-              <label>Start Date</label>
-              <input type="date" data-field="startDate" />
-            </div>
-            <div class="col-6">
-              <label>End Date</label>
-              <input type="date" data-field="endDate" />
-            </div>
-            <div class="col-12">
-              <label>Key Duties</label>
-              <textarea rows="3" data-field="duties"></textarea>
-            </div>
-          </div>
-
-          <div class="btnbar">
-            <button type="button" class="secondary" onclick="removeExperience(this)">Remove</button>
-            <span></span>
-          </div>
-
-          <hr />
-        </div>
-      </template>
-    </fieldset>
-
-    <fieldset>
-      <legend>Driver’s License (role-dependent)</legend>
-      <div class="row">
-        <div class="col-12">
-          <label for="licenseReq">This role may require driving. Do you currently hold a valid driver’s license?</label>
-          <select id="licenseReq" data-name="licenseReq">
-            <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-          <div id="err-license" class="error hidden"></div>
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="btnbar">
-      <a class="btn secondary" href="page2.html">Back</a>
-      <button type="submit">Next</button>
+      <hr />
     </div>
-  </form>
+  </template>
+</fieldset>
+
+<fieldset>
+  <legend>Driver’s License (role-dependent)</legend>
+  <div class="row">
+    <div class="col-12">
+      <label for="licenseReq">This role may require driving. Do you currently hold a valid driver’s license?</label>
+      <select id="licenseReq" data-name="licenseReq" onchange="toggleLicenseDetails()">
+        <option value="">Select</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <div id="err-license" class="error hidden"></div>
+    </div>
+  </div>
+
+  <div id="licenseDetails" class="row hidden" aria-live="polite">
+    <div class="col-6">
+      <label for="licenseNumber">License Number *</label>
+      <input id="licenseNumber" data-name="licenseNumber" type="text" />
+      <div id="err-licenseNumber" class="error hidden"></div>
+    </div>
+
+    <div class="col-3">
+      <label for="licenseIssue">Issue Date *</label>
+      <input id="licenseIssue" data-name="licenseIssue" type="date" placeholder="mm/dd/yyyy" />
+      <div id="err-licenseIssue" class="error hidden"></div>
+    </div>
+
+    <div class="col-3">
+      <label for="licenseExpiry">Expiry Date *</label>
+      <input id="licenseExpiry" data-name="licenseExpiry" type="date" placeholder="mm/dd/yyyy" />
+      <div id="err-licenseExpiry" class="error hidden"></div>
+    </div>
+
+    <div class="col-6">
+      <label for="licenseState">Issuing State *</label>
+      <select id="licenseState" data-name="licenseState">
+        <option value="">Select state</option>
+        <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+        <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+        <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+        <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+        <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+        <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+        <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+        <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+        <option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option>
+        <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+      </select>
+      <div id="err-licenseState" class="error hidden"></div>
+    </div>
+  </div>
+</fieldset>
+
+<div class="btnbar">
+  <a class="btn secondary" href="page2.html">Back</a>
+  <button type="submit">Next</button>
+</div>
+</form>
 </main>
 
 <footer>
@@ -116,20 +175,15 @@
     data.experiences = list;
     saveData(data);
   }
-
   function renderExperiences() {
     const wrap = document.getElementById('expList');
-    if (!wrap) return;
     wrap.innerHTML = '';
-
     const tpl = document.getElementById('expTemplate');
     const exps = getExperiences();
-
     if (exps.length === 0) {
       exps.push({ employer:'', jobTitle:'', startDate:'', endDate:'', duties:'' });
       setExperiences(exps);
     }
-
     exps.forEach((exp, idx) => {
       const node = tpl.content.cloneNode(true);
       const card = node.querySelector('.exp-card');
@@ -144,18 +198,15 @@
           setExperiences(list);
         });
       });
-
       wrap.appendChild(node);
     });
   }
-
   function addExperience() {
     const list = getExperiences();
     list.push({ employer:'', jobTitle:'', startDate:'', endDate:'', duties:'' });
     setExperiences(list);
     renderExperiences();
   }
-
   function removeExperience(btn) {
     const card = btn.closest('.exp-card');
     const idx = Number(card.dataset.expIndex);
@@ -165,43 +216,60 @@
     renderExperiences();
   }
 
+  function toggleLicenseDetails() {
+    const sel = document.getElementById('licenseReq');
+    const box = document.getElementById('licenseDetails');
+    box.classList.toggle('hidden', sel.value !== 'yes');
+  }
+
   function validatePage3() {
     let ok = true;
-
-    const lic = document.getElementById('licenseReq').value.trim();
+    const licSel = document.getElementById('licenseReq');
     const licErr = document.getElementById('err-license');
-    licErr.classList.add('hidden');
-    licErr.textContent = '';
-    if (!lic) {
+    licErr.textContent=''; licErr.classList.add('hidden');
+    if (!licSel.value) {
       licErr.textContent = "Please answer the driver’s license question.";
       licErr.classList.remove('hidden');
       ok = false;
     }
+    if (licSel.value === 'yes') {
+      const ln  = document.getElementById('licenseNumber').value.trim();
+      const isd = document.getElementById('licenseIssue').value;
+      const exp = document.getElementById('licenseExpiry').value;
+      const st  = document.getElementById('licenseState').value;
+      ['licenseNumber','licenseIssue','licenseExpiry','licenseState'].forEach(id=>{
+        const e=document.getElementById('err-'+id); e.textContent=''; e.classList.add('hidden');
+      });
+      if (!ln){const e=document.getElementById('err-licenseNumber'); e.textContent="License number required."; e.classList.remove('hidden'); ok=false;}
+      if (!isd){const e=document.getElementById('err-licenseIssue'); e.textContent="Issue date required."; e.classList.remove('hidden'); ok=false;}
+      if (!exp){const e=document.getElementById('err-licenseExpiry'); e.textContent="Expiry date required."; e.classList.remove('hidden'); ok=false;}
+      if (!st){const e=document.getElementById('err-licenseState'); e.textContent="Issuing state required."; e.classList.remove('hidden'); ok=false;}
+      if (isd && exp && exp < isd){const e=document.getElementById('err-licenseExpiry'); e.textContent="Expiry must be after issue date."; e.classList.remove('hidden'); ok=false;}
+    }
 
     const list = getExperiences();
     const expErr = document.getElementById('err-experience');
-    expErr.classList.add('hidden');
-    expErr.textContent = '';
-
-    for (let i = 0; i < list.length; i++) {
-      const e = list[i];
+    expErr.textContent=''; expErr.classList.add('hidden');
+    for (let i=0;i<list.length;i++){
+      const e=list[i];
       const hasAny = e.employer || e.jobTitle || e.startDate || e.endDate || e.duties;
       if (hasAny && (!e.employer || !e.jobTitle)) {
-        expErr.textContent = "Each experience you add must include Employer and Job Title.";
-        expErr.classList.remove('hidden');
-        ok = false; break;
+        expErr.textContent="Each experience must include Employer and Job Title.";
+        expErr.classList.remove('hidden'); ok=false; break;
       }
-      if (e.startDate && e.endDate && e.endDate < e.startDate) {
-        expErr.textContent = "End Date must be after Start Date in experience #" + (i+1) + ".";
-        expErr.classList.remove('hidden');
-        ok = false; break;
+      if (e.startDate && e.endDate && e.endDate<e.startDate){
+        expErr.textContent="End Date must be after Start Date in experience #"+(i+1)+".";
+        expErr.classList.remove('hidden'); ok=false; break;
       }
     }
 
-    if (ok) window.location.href = "page4.html";
+    if (ok) window.location.href="page4.html";
   }
 
-  window.addEventListener('DOMContentLoaded', renderExperiences);
+  window.addEventListener('DOMContentLoaded', () => {
+    renderExperiences();
+    toggleLicenseDetails();
+  });
 </script>
 
 </body>
