@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Applicant & Position</title>
 <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
@@ -27,7 +28,7 @@
 <legend>Applicant Information</legend>
 <div class="row">
   <div class="col-6">
-    <label for="firstName">First Name *</label>
+    <label for="firstName">First Name *<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext"> Please use the name on your state-issued id</span></span></div></label>
     <input id="firstName" data-name="firstName" type="text" autocomplete="given-name" />
     <div id="err-firstName" class="error hidden"></div>
   </div>
@@ -38,7 +39,7 @@
   </div>
   <div class="col-6">
     <label for="email">Email *</label>
-    <input id="email" data-name="email" type="email" autocomplete="email" aria-describedby="help-email" />
+    <input id="email" data-name="email" type="email" autocomplete="email" aria-describedby="help-email" placeholder="yourName52@yahoo.com" />
     <div id="help-email" class="help">Use a personal email you check often.</div>
     <div id="err-email" class="error hidden"></div>
   </div>
@@ -48,9 +49,14 @@
     <div id="err-phone" class="error hidden"></div>
   </div>
   <div class="col-12">
-    <label for="address">Street Address *</label>
-    <input id="address" data-name="address" type="text" autocomplete="address-line1" />
-    <div id="err-address" class="error hidden"></div>
+    <label for="address1">Street Address *</label>
+    <input id="address1" data-name="address1" type="text" autocomplete="address-line1" />
+    <div id="err-address1" class="error hidden"></div>
+  </div>
+    <div class="col-12">
+    <label for="address2">Apt/unit/suite (if applicable)</label>
+    <input id="address2" data-name="address2" type="text" autocomplete="address-line2" />
+    <div id="err-address2" class="error hidden"></div>
   </div>
   <div class="col-4">
     <label for="city">City *</label>
@@ -59,15 +65,13 @@
   </div>
   <div class="col-4">
     <label for="state">State *</label>
-    <select id="state" data-name="state">
-      <option value="">Select</option>
-      <option>FL</option><option>GA</option><option>AL</option><option>SC</option><option>NC</option>
-    </select>
+    <select id="state" data-name="state"></select>
     <div id="err-state" class="error hidden"></div>
   </div>
   <div class="col-4">
-    <label for="zip">ZIP</label>
+    <label for="zip">ZIP*</label>
     <input id="zip" data-name="zip" type="text" inputmode="numeric" pattern="\d{5}" />
+    <div id = "err-zip" class ="error hidden"></div>
   </div>
 </div>
 </fieldset>
@@ -86,8 +90,8 @@
       <div id="err-position" class="error hidden"></div>
     </div>
     <div class="col-6">
-      <label for="salary">Expected Salary Range (USD)</label>
-      <input id="salary" data-name="salary" type="number" min="0" step="100" />
+      <label for="salary">Expected Annual Salary (USD)<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext">Enter net annaul expectation</span></div></label>
+      <input id="salary" data-name="salary" type="number" min="20000" step="1000" />
     </div>
   </div>
 </fieldset>

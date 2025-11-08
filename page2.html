@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Availability & Education</title>
 <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
 
@@ -29,28 +30,70 @@
       <div class="row">
         <div class="col-12 help">Select the days you can work and (optionally) your typical start-end times.</div>
         <div class="col-12">
-          <label>Days</label>
           <div role="group" aria-label="Days available">
-            <label><input data-name="dayMon" id="dayMon" type="checkbox"> Mon</label>
-            <label><input data-name="dayTue" id="dayTue" type="checkbox"> Tue</label>
-            <label><input data-name="dayWed" id="dayWed" type="checkbox"> Wed</label>
-            <label><input data-name="dayThu" id="dayThu" type="checkbox"> Thu</label>
-            <label><input data-name="dayFri" id="dayFri" type="checkbox"> Fri</label>
-            <label><input data-name="daySat" id="daySat" type="checkbox"> Sat</label>
-            <label><input data-name="daySun" id="daySun" type="checkbox"> Sun</label>
+          <div class="availability-grid">
+            <div class="header">Days Available</div>
+            <div class="header">Start Time</div>
+            <div class ="header">End Time</div>
+            <div class="day-row">
+              <label><input type="checkbox" name="mon"> Mon</label>
+              <input type="time" name="monStart">
+              <input type="time" name="monEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="tue"> Tue</label>
+              <input type="time" name="tueStart">
+              <input type="time" name="tueEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="wed"> Wed</label>
+              <input type="time" name="wedStart">
+              <input type="time" name="wedEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="thu"> Thu</label>
+              <input type="time" name="thuStart">
+              <input type="time" name="thuEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="fri"> Fri</label>
+              <input type="time" name="friStart">
+              <input type="time" name="friEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="sat"> Sat</label>
+              <input type="time" name="satStart">
+              <input type="time" name="satEnd">
+            </div>
+            <div class="day-row">
+              <label><input type="checkbox" name="sun"> Sun</label>
+              <input type="time" name="sunStart">
+              <input type="time" name="sunEnd">
+            </div>
+          </div>
+          <label class="eligibility"><input type="checkbox" name="eligibility">I am eligible to work within the United States<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext">US citizen, Greencard holder, Visa holder or equivalent</span></span></div></label></label>
+        </div>
+            <!--<div class ="col-12">
+              <label><input data-name="dayMon" id="dayMon" type="checkbox"> Mon</label>
+              <label><input data-name="dayTue" id="dayTue" type="checkbox"> Tue</label>
+              <label><input data-name="dayWed" id="dayWed" type="checkbox"> Wed</label>
+              <label><input data-name="dayThu" id="dayThu" type="checkbox"> Thu</label>
+              <label><input data-name="dayFri" id="dayFri" type="checkbox"> Fri</label>
+              <label><input data-name="daySat" id="daySat" type="checkbox"> Sat</label>
+              <label><input data-name="daySun" id="daySun" type="checkbox"> Sun</label>
+            </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <label for="timeStart">Typical Start Time</label>
           <input id="timeStart" data-name="timeStart" type="time">
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <label for="timeEnd">Typical End Time</label>
           <input id="timeEnd" data-name="timeEnd" type="time">
         </div>
         <div class="col-12">
-          <label><input id="nights" data-name="nights" type="checkbox"> I can work nights</label>
-        </div>
+          <label><input id="nights" data-name="nights" type="checkbox"> I can work nights</label> -->
       </div>
     </fieldset>
 
@@ -58,7 +101,7 @@
       <legend>Education</legend>
       <div class="row">
         <div class="col-6">
-          <label for="degree">Highest Diploma/Degree *</label>
+          <label for="degree">Highest Diploma/Degree *<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext">Enter the most relevant degree to the position you are applying for</span></div></label>
           <select id="degree" data-name="degree">
             <option value="">Select</option>
             <option>High School</option>
@@ -163,6 +206,7 @@
     if (!deg){ e.textContent='Please choose your highest degree.'; e.classList.remove('hidden'); ok=false; }
     if (ok) window.location.href='page3.html';
   }
+
 </script>
 
 </body>

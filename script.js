@@ -34,6 +34,7 @@ function validatePage1(){
     ['address','Address is required.'],
     ['city','City is required.'],
     ['state','State is required.'],
+    ['zip','Zip code is required.'],
     ['position','Please select a position.']
   ];
   req.forEach(([name,msg,type])=>{
@@ -73,3 +74,32 @@ function submitApp(e){
   document.getElementById('success').classList.remove('hidden');
   document.getElementById('submitBtn').setAttribute('disabled','true');
 }
+
+async function initializeStates(selectId) {
+  const states = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
+        'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
+        'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
+        'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+        'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina',
+        'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+        'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
+
+      const dropdown = document.getElementById(selectId);
+      dropdown.innerHTML = '';
+
+      const defaultOption = document.createElement('option');
+      defaultOption.text = 'Select a state';
+      defaultOption.value = '';
+      dropdown.add(defaultOption);
+
+      states.forEach(state => {
+        const option = document.createElement('option');
+        option.value = state;
+        option.text = state;
+        dropdown.add(option);
+      });
+    }
+initializeStates('state');

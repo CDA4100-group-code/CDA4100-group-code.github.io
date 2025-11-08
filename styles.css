@@ -28,3 +28,73 @@ button.secondary, .btn.secondary { background:#e5e7eb; color:#111; }
 .success { background:#ecfdf5; color:#065f46; padding:12px; border-radius:10px; border:1px solid #a7f3d0; margin:12px 0; }
 .hidden { display:none !important; }
 footer { color:var(--muted); border-top:1px solid #e5e7eb; padding:16px 0; margin-top:24px; }
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* Add dots under the hoverable text */
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltiptext {
+  visibility: hidden; /* Hidden by default */
+  width: 130px;
+  background-color: black;
+  color: #ffffff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1; /* Ensure tooltip is displayed above content */
+}
+
+/* Show the tooltip text on hover */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%; /* To the left of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.availability-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 6px 10px;
+  align-items: center;
+  margin-top: 0.5em;
+}
+
+.header {
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+.day-row {
+  display: contents; /* allows label and inputs to align within grid columns */
+}
+
+.day-row label {
+  font-weight: 500;
+}
+
+.day-row input[type="time"] {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.nights {
+  display: block;
+  margin-top: 1em;
+}
