@@ -6,26 +6,6 @@
 <title>Experience & License</title>
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-  input[type="date"] {
-    position: relative;
-    color: transparent;
-  }
-  input[type="date"]:focus,
-  input[type="date"]:valid {
-    color: #111;
-  }
-  input[type="date"]::before {
-    content: attr(placeholder);
-    color: #9ca3af;
-    position: absolute;
-    left: 10px;
-  }
-  input[type="date"]:focus::before,
-  input[type="date"]:valid::before {
-    content: "";
-  }
-</style>
 </head>
 <body>
 
@@ -70,14 +50,14 @@
         </div>
         <div class="col-6">
           <label>Start Date</label>
-          <input type="date" data-field="startDate" placeholder="mm/dd/yyyy" />
+          <input type="date" data-field="startDate" placeholder="mm/dd/yyyy" class="page3-date-input" />
         </div>
         <div class="col-6">
           <label>End Date</label>
-          <input type="date" data-field="endDate" placeholder="mm/dd/yyyy" />
+          <input type="date" data-field="endDate" placeholder="mm/dd/yyyy" class="page3-date-input" />
         </div>
         <div class="col-12">
-          <label>Key Duties<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext">Please summarize each duty to one or two sentences</span></div></label>
+          <label>Key Duties<div class="tooltip"><i class="material-icons icon-small">info_outline</i><span class = "tooltiptext">Please summarize each duty to one or two sentences</span></div></label>
           <textarea rows="3" data-field="duties"></textarea>
         </div>
       </div>
@@ -97,7 +77,7 @@
   <div class="row">
     <div class="col-12">
       <label for="licenseReq">This role may require driving. Do you currently hold a valid driver’s license?</label>
-      <select id="licenseReq" data-name="licenseReq" onchange="toggleLicenseDetails()">
+      <select id="licenseReq" data-name="licenseReq" onchange="toggleLicenseDetails()" required aria-required="true">
         <option value="">Select</option>
         <option value="yes">Yes</option>
         <option value="no">No</option>
@@ -109,25 +89,25 @@
   <div id="licenseDetails" class="row hidden" aria-live="polite">
     <div class="col-6">
       <label for="licenseNumber">License Number *</label>
-      <input id="licenseNumber" data-name="licenseNumber" type="text" />
+      <input id="licenseNumber" data-name="licenseNumber" type="text" required aria-required="true" />
       <div id="err-licenseNumber" class="error hidden"></div>
     </div>
 
     <div class="col-3">
       <label for="licenseIssue">Issue Date *</label>
-      <input id="licenseIssue" data-name="licenseIssue" type="date" placeholder="mm/dd/yyyy" />
+      <input id="licenseIssue" data-name="licenseIssue" type="date" placeholder="mm/dd/yyyy" class="page3-date-input" required aria-required="true" />
       <div id="err-licenseIssue" class="error hidden"></div>
     </div>
 
     <div class="col-3">
       <label for="licenseExpiry">Expiry Date *</label>
-      <input id="licenseExpiry" data-name="licenseExpiry" type="date" placeholder="mm/dd/yyyy" />
+      <input id="licenseExpiry" data-name="licenseExpiry" type="date" placeholder="mm/dd/yyyy" class="page3-date-input" required aria-required="true" />
       <div id="err-licenseExpiry" class="error hidden"></div>
     </div>
 
     <div class="col-6">
       <label for="licenseState">Issuing State *</label>
-      <select id="licenseState" data-name="licenseState">
+        <select id="licenseState" data-name="licenseState" required aria-required="true">
         <option value="">Select state</option>
         <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
         <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>

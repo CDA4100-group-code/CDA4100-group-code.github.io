@@ -35,6 +35,7 @@ footer { color:var(--muted); border-top:1px solid #e5e7eb; padding:16px 0; margi
   display: inline-block;
   border-bottom: 1px dotted black; /* Add dots under the hoverable text */
   cursor: pointer;
+  padding: 2px;
 }
 
 /* Tooltip text */
@@ -97,4 +98,64 @@ footer { color:var(--muted); border-top:1px solid #e5e7eb; padding:16px 0; margi
 .nights {
   display: block;
   margin-top: 1em;
+}
+
+/* Accessibility: hover resize for labels and text */
+label {
+  transition: font-size 0.2s ease;
+}
+
+label:hover {
+  font-size: 1.5em;
+}
+
+.help:hover {
+  font-size: 1.5em;
+}
+
+legend:hover {
+  font-size: 1.5em;
+}
+
+.error:hover,
+.success:hover {
+  font-size: 1.5em;
+}
+
+/* Focus visible for keyboard navigation */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Specific styles for date inputs in page3 (Experience & License) */
+.page3-date-input {
+  position: relative;
+  color: transparent;
+}
+
+.page3-date-input:focus,
+.page3-date-input:valid {
+  color: #111;
+}
+
+.page3-date-input::before {
+  content: attr(placeholder);
+  color: #9ca3af;
+  position: absolute;
+  left: 10px;
+}
+
+.page3-date-input:focus::before,
+.page3-date-input:valid::before {
+  content: "";
+}
+
+/* Material Icons sizing class */
+.icon-small {
+  font-size: 14px;
 }

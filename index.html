@@ -28,29 +28,29 @@
 <legend>Applicant Information</legend>
 <div class="row">
   <div class="col-6">
-    <label for="firstName">First Name *<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext"> Please use the name on your state-issued id</span></span></div></label>
-    <input id="firstName" data-name="firstName" type="text" autocomplete="given-name" />
+    <label for="firstName">First Name *<div class="tooltip"><i class="material-icons icon-small">info_outline</i><span class = "tooltiptext"> Please use the name on your state-issued id</span></span></div></label>
+    <input id="firstName" data-name="firstName" type="text" autocomplete="given-name" required aria-required="true" />
     <div id="err-firstName" class="error hidden"></div>
   </div>
   <div class="col-6">
     <label for="lastName">Last Name *</label>
-    <input id="lastName" data-name="lastName" type="text" autocomplete="family-name" />
+    <input id="lastName" data-name="lastName" type="text" autocomplete="family-name" required aria-required="true" />
     <div id="err-lastName" class="error hidden"></div>
   </div>
   <div class="col-6">
     <label for="email">Email *</label>
-    <input id="email" data-name="email" type="email" autocomplete="email" aria-describedby="help-email" placeholder="yourName52@yahoo.com" />
+    <input id="email" data-name="email" type="email" autocomplete="email" aria-describedby="help-email" placeholder="yourName52@yahoo.com" required aria-required="true" />
     <div id="help-email" class="help">Use a personal email you check often.</div>
     <div id="err-email" class="error hidden"></div>
   </div>
   <div class="col-6">
     <label for="phone">Phone *</label>
-    <input id="phone" data-name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" />
+    <input id="phone" data-name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required aria-required="true" />
     <div id="err-phone" class="error hidden"></div>
   </div>
   <div class="col-12">
     <label for="address1">Street Address *</label>
-    <input id="address1" data-name="address1" type="text" autocomplete="address-line1" />
+    <input id="address1" data-name="address1" type="text" autocomplete="address-line1" required aria-required="true" />
     <div id="err-address1" class="error hidden"></div>
   </div>
     <div class="col-12">
@@ -60,17 +60,17 @@
   </div>
   <div class="col-4">
     <label for="city">City *</label>
-    <input id="city" data-name="city" type="text" autocomplete="address-level2" />
+    <input id="city" data-name="city" type="text" autocomplete="address-level2" required aria-required="true" />
     <div id="err-city" class="error hidden"></div>
   </div>
   <div class="col-4">
     <label for="state">State *</label>
-    <select id="state" data-name="state"></select>
+    <select id="state" data-name="state" required aria-required="true"></select>
     <div id="err-state" class="error hidden"></div>
   </div>
   <div class="col-4">
     <label for="zip">ZIP*</label>
-    <input id="zip" data-name="zip" type="text" inputmode="numeric" pattern="\d{5}" />
+    <input id="zip" data-name="zip" type="text" inputmode="numeric" pattern="\d{5}" required aria-required="true" />
     <div id = "err-zip" class ="error hidden"></div>
   </div>
 </div>
@@ -81,7 +81,7 @@
   <div class="row">
     <div class="col-6">
       <label for="position">Position Applied For *</label>
-      <select id="position" data-name="position">
+      <select id="position" data-name="position" required aria-required="true">
         <option value="">Select a position</option>
         <option>Front Desk Associate</option>
         <option>Technician</option>
@@ -90,7 +90,7 @@
       <div id="err-position" class="error hidden"></div>
     </div>
     <div class="col-6">
-      <label for="salary">Expected Annual Salary (USD)<div class="tooltip"><i class="material-icons" style="font-size:14px">info_outline</i><span class = "tooltiptext">Enter net annaul expectation</span></div></label>
+      <label for="salary">Expected Annual Salary (USD)<div class="tooltip"><i class="material-icons icon-small">info_outline</i><span class = "tooltiptext">Enter net annual expectation</span></div></label>
       <input id="salary" data-name="salary" type="number" min="20000" step="1000" />
     </div>
   </div>
