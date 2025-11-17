@@ -189,6 +189,27 @@ function validatePage1() {
   }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const phoneInput = document.querySelector('input[data-name="phone"]') 
+                   || document.getElementById("phone");
+
+  if (!phoneInput) return;
+
+  phoneInput.addEventListener("input", (e) => {
+    let val = e.target.value.replace(/\D/g, ""); 
+
+    if (val.length > 10) val = val.slice(0, 10);
+
+    let formatted = "";
+
+    if (val.length > 0) formatted = "(" + val.substring(0, 3);
+    if (val.length >= 4) formatted += ") " + val.substring(3, 6);
+    if (val.length >= 7) formatted += "-" + val.substring(6, 10);
+
+    e.target.value = formatted;
+  });
+});
+
 // ============================================================================
 // PAGE 2 VALIDATION - AVAILABILITY & EDUCATION
 // ============================================================================
