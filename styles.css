@@ -1,4 +1,3 @@
-
 :root { --fg:#111; --bg:#fff; --brand:#1e40af; --error:#b91c1c; --muted:#6b7280; }
 * { box-sizing: border-box; }
 html { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -11,7 +10,14 @@ nav a { text-decoration: none; color: var(--brand); padding:6px 10px; border-rad
 nav a[aria-current="page"] { background:#e0e7ff; }
 fieldset { border:1px solid #e5e7eb; border-radius:12px; padding:16px; margin:16px 0; }
 legend { padding: 0 8px; font-weight:600; }
-label { display:block; margin: 12px 0 6px; }
+
+label {
+  display:block;
+  margin: 12px 0 6px;
+  min-height: 2.4rem;   
+  line-height: 1.2;
+}
+
 input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"], select, textarea {
   width:100%; padding:10px; border:1px solid #d1d5db; border-radius:10px; font-size:1rem;
 }
@@ -101,10 +107,6 @@ footer { color:var(--muted); border-top:1px solid #e5e7eb; padding:16px 0; margi
 }
 
 /* Accessibility: hover resize for labels and text */
-label {
-  transition: font-size 0.2s ease;
-}
-
 label:hover {
   font-size: 1.5em;
 }
@@ -119,6 +121,15 @@ legend:hover {
 
 .error:hover,
 .success:hover {
+  font-size: 1.5em;
+}
+
+
+fieldset p {
+  transition: font-size 0.2s ease;
+}
+
+fieldset p:hover {
   font-size: 1.5em;
 }
 
@@ -158,4 +169,56 @@ button:focus-visible,
 /* Material Icons sizing class */
 .icon-small {
   font-size: 14px;
+}
+
+#label-firstname {
+  position: relative;
+  top: -2px;  
+}
+
+/* Fix tooltip so it doesn't shift label or input layout */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  position: absolute;
+  z-index: 50;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 120%; /* show below label instead of affecting its position */
+  background: black;
+  color: white;
+  padding: 6px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* shrink icon so zoom effect doesn't impact spacing */
+.tooltip i {
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+/* Prevent label hover zoom from affecting layout */
+label,
+legend,
+.help {
+  display: inline-block;
+}
+
+.cert-upload {
+  display: flex;
+  flex-direction: column;
+  gap: -600px;
 }
