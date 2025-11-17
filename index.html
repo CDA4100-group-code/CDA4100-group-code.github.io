@@ -14,93 +14,196 @@
     <h1>UNFinished Business – Employment Application</h1>
     <nav aria-label="Steps">
       <a href="index.html" aria-current="page">1. Applicant & Position</a>
-      <a href="page2.html" >2. Availability & Education</a>
-      <a href="page3.html" >3. Experience & License</a>
-      <a href="page4.html" >4. References & Skills</a>
-      <a href="page5.html" >5. Acknowledgement</a>
+      <a href="page2.html">2. Availability & Education</a>
+      <a href="page3.html">3. Experience & License</a>
+      <a href="page4.html">4. References & Skills</a>
+      <a href="page5.html">5. Acknowledgement</a>
     </nav>
   </div>
 </header>
 
 <main class="container">
-<form onsubmit="event.preventDefault(); validatePage1();">
-<fieldset>
-<legend>Applicant Information</legend>
-<div class="row">
-  <div class="col-6">
-    <label for="firstName">First Name *<div class="tooltip"><i class="material-icons icon-small">info_outline</i><span class = "tooltiptext"> Please use the name on your state-issued id</span></span></div></label>
-    <input id="firstName" data-name="firstName" type="text" autocomplete="given-name" required aria-required="true" />
-    <div id="err-firstName" class="error hidden"></div>
-  </div>
-  <div class="col-6">
-    <label for="lastName">Last Name *</label>
-    <input id="lastName" data-name="lastName" type="text" autocomplete="family-name" required aria-required="true" />
-    <div id="err-lastName" class="error hidden"></div>
-  </div>
-  <div class="col-6">
-    <label for="email">Email *</label>
-    <input id="email" data-name="email" type="email" autocomplete="email" aria-describedby="help-email" placeholder="yourName52@yahoo.com" required aria-required="true" />
-    <div id="help-email" class="help">Use a personal email you check often.</div>
-    <div id="err-email" class="error hidden"></div>
-  </div>
-  <div class="col-6">
-    <label for="phone">Phone *</label>
-    <input id="phone" data-name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required aria-required="true" />
-    <div id="err-phone" class="error hidden"></div>
-  </div>
-  <div class="col-12">
-    <label for="address1">Street Address *</label>
-    <input id="address1" data-name="address1" type="text" autocomplete="address-line1" required aria-required="true" />
-    <div id="err-address1" class="error hidden"></div>
-  </div>
-    <div class="col-12">
-    <label for="address2">Apt/unit/suite (if applicable)</label>
-    <input id="address2" data-name="address2" type="text" autocomplete="address-line2" />
-    <div id="err-address2" class="error hidden"></div>
-  </div>
-  <div class="col-4">
-    <label for="city">City *</label>
-    <input id="city" data-name="city" type="text" autocomplete="address-level2" required aria-required="true" />
-    <div id="err-city" class="error hidden"></div>
-  </div>
-  <div class="col-4">
-    <label for="state">State *</label>
-    <select id="state" data-name="state" required aria-required="true"></select>
-    <div id="err-state" class="error hidden"></div>
-  </div>
-  <div class="col-4">
-    <label for="zip">ZIP*</label>
-    <input id="zip" data-name="zip" type="text" inputmode="numeric" pattern="\d{5}" required aria-required="true" />
-    <div id = "err-zip" class ="error hidden"></div>
-  </div>
-</div>
-</fieldset>
+  <form onsubmit="event.preventDefault(); validatePage1();">
+    
+    <fieldset>
+      <legend>Applicant Information</legend>
+      <div class="row">
+        
+        <div class="col-6">
+          <label for="firstName" id="label-firstname">
+            First Name *
+            <span class="tooltip">
+              <i class="material-icons icon-small" aria-hidden="true">info_outline</i>
+              <span class="tooltiptext">Please use the name on your state-issued ID.</span>
+            </span>
+          </label>
+          <input
+            id="firstName"
+            data-name="firstName"
+            type="text"
+            autocomplete="given-name"
+            required
+            aria-required="true"
+          />
+          <div id="err-firstName" class="error hidden"></div>
+        </div>
 
-<fieldset>
-  <legend>Position</legend>
-  <div class="row">
-    <div class="col-6">
-      <label for="position">Position Applied For *</label>
-      <select id="position" data-name="position" required aria-required="true">
-        <option value="">Select a position</option>
-        <option>Front Desk Associate</option>
-        <option>Technician</option>
-        <option>Operations Assistant</option>
-      </select>
-      <div id="err-position" class="error hidden"></div>
-    </div>
-    <div class="col-6">
-      <label for="salary">Expected Annual Salary (USD)<div class="tooltip"><i class="material-icons icon-small">info_outline</i><span class = "tooltiptext">Enter net annual expectation</span></div></label>
-      <input id="salary" data-name="salary" type="number" min="20000" step="1000" />
-    </div>
-  </div>
-</fieldset>
+        <div class="col-6">
+          <label for="lastName">Last Name *</label>
+          <input
+            id="lastName"
+            data-name="lastName"
+            type="text"
+            autocomplete="family-name"
+            required
+            aria-required="true"
+          />
+          <div id="err-lastName" class="error hidden"></div>
+        </div>
 
-<div class="btnbar">
-  <span></span>
-  <button type="submit">Next</button>
-</div>
-</form>
+        <div class="col-6">
+          <label for="email">Email *</label>
+          <input
+            id="email"
+            data-name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="yourName52@yahoo.com"
+            required
+            aria-required="true"
+          />
+          <div id="help-email" class="help">Use a personal email you check often.</div>
+          <div id="err-email" class="error hidden"></div>
+        </div>
+
+        <div class="col-6">
+          <label for="phone">Phone *</label>
+          <input
+            id="phone"
+            data-name="phone"
+            type="tel"
+            autocomplete="tel"
+            placeholder="(555) 123-4567"
+            required
+            aria-required="true"
+          />
+          <div id="err-phone" class="error hidden"></div>
+        </div>
+
+        <div class="col-12">
+          <label for="address1">Street Address *</label>
+          <input
+            id="address1"
+            data-name="address1"
+            type="text"
+            autocomplete="address-line1"
+            required
+            aria-required="true"
+          />
+          <div id="err-address1" class="error hidden"></div>
+        </div>
+
+        <div class="col-12">
+          <label for="address2">Apt/unit/suite (if applicable)</label>
+          <input
+            id="address2"
+            data-name="address2"
+            type="text"
+            autocomplete="address-line2"
+          />
+          <div id="err-address2" class="error hidden"></div>
+        </div>
+
+        <div class="col-4">
+          <label for="city">City *</label>
+          <input
+            id="city"
+            data-name="city"
+            type="text"
+            autocomplete="address-level2"
+            required
+            aria-required="true"
+          />
+          <div id="err-city" class="error hidden"></div>
+        </div>
+
+        <div class="col-4">
+          <label for="state">State *</label>
+          <select
+            id="state"
+            data-name="state"
+            required
+            aria-required="true"
+          >
+            <option value="">Select a state</option>
+          </select>
+          <div id="err-state" class="error hidden"></div>
+        </div>
+
+        <div class="col-4">
+          <label for="zip">ZIP *</label>
+          <input
+            id="zip"
+            data-name="zip"
+            type="text"
+            inputmode="numeric"
+            autocomplete="postal-code"
+            required
+            aria-required="true"
+          />
+          <div id="err-zip" class="error hidden"></div>
+        </div>
+
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Position</legend>
+      <div class="row">
+        
+        <div class="col-6">
+          <label for="position">Position Applied For *</label>
+          <select
+            id="position"
+            data-name="position"
+            required
+            aria-required="true"
+          >
+            <option value="">Select a position</option>
+            <option>Front Desk Associate</option>
+            <option>Technician</option>
+            <option>Operations Assistant</option>
+          </select>
+          <div id="err-position" class="error hidden"></div>
+        </div>
+
+        <div class="col-6">
+          <label for="salary" id="label-salary">
+            Expected Annual Salary (USD)
+            <span class="tooltip">
+              <i class="material-icons icon-small" aria-hidden="true">info_outline</i>
+              <span class="tooltiptext">Enter your expected net annual salary.</span>
+            </span>
+          </label>
+          <input
+            id="salary"
+            data-name="salary"
+            type="number"
+            min="20000"
+            step="1000"
+            placeholder="30000"
+          />
+        </div>
+
+      </div>
+    </fieldset>
+
+    <div class="btnbar">
+      <span></span>
+      <button type="submit">Next</button>
+    </div>
+
+  </form>
 </main>
 
 <footer>
